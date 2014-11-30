@@ -5,6 +5,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.content.WakefulBroadcastReceiver;
+import android.util.Log;
 
 public class GcmBroadcastReceiver extends WakefulBroadcastReceiver {
 
@@ -14,5 +15,7 @@ public class GcmBroadcastReceiver extends WakefulBroadcastReceiver {
 				GCMNotificationIntentService.class.getName());
 		startWakefulService(context, (intent.setComponent(comp)));
 		setResultCode(Activity.RESULT_OK);
-	}
+
+
+    }
 }

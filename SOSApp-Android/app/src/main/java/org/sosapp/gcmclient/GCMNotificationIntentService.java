@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.PowerManager;
 import android.os.SystemClock;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
@@ -56,8 +57,17 @@ public class GCMNotificationIntentService extends IntentService {
 
 				sendNotification("Message Received from Google GCM Server: "
 						+ extras.get(Config.MESSAGE_KEY));
-				Log.i(TAG, "Received: " + extras.toString());
-			}
+                Log.i(TAG, "Received: " + extras.toString());
+// Call SOSActivity
+                Intent i = new Intent(getApplicationContext(),SOSActivity.class);
+                i.putExtra("gcmMessage", extras.get(Config.MESSAGE_KEY).toString());
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                Log.d("GCMNotificationService",
+                        "Starting SOSActivity");
+                startActivity(i);
+
+
+            }
 		}
 		GcmBroadcastReceiver.completeWakefulIntent(intent);
 	}
